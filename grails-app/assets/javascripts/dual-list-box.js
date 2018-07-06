@@ -117,7 +117,7 @@
                 case 'str': /* Selected to the right. */
                     unselected.find('option:selected').appendTo(selected);
                     $(this).prop('disabled', true);
-                    if (options.upDownSortBtn == true) $('.custom-stl').prop('disabled', false);
+                    if (options.upDownSortBtn == true) $('.custom-stl').prop('disabled', true);
                     break;
                 case 'atr': /* All to the right. */
                     if (unselected.find('option').length >= options.maxAllBtn && confirm(options.warning) ||
@@ -159,7 +159,8 @@
                 case 'sort': /* Selected to up and down. */
                     selected.filterByText($(options.parentElement + ' .filter-selected'), options.timeout, options.parentElement).scrollTop(0).sortOptions();
                     $('.custom-stl').prop('disabled',true);
-                    checkEnableDisableUpDown();
+                    $('.up').prop('disabled',true);
+                    $('.down').prop('disabled',true);
                     break;
                 default: break;
             }
