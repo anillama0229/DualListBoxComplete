@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DualListBoxTest.iml" filepath="$PROJECT_DIR$/.idea/modules/DualListBoxTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DualListBoxTest_integrationTest.iml" filepath="$PROJECT_DIR$/.idea/modules/DualListBoxTest_integrationTest.iml" group="DualListBoxTest" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DualListBoxTest_main.iml" filepath="$PROJECT_DIR$/.idea/modules/DualListBoxTest_main.iml" group="DualListBoxTest" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DualListBoxTest_test.iml" filepath="$PROJECT_DIR$/.idea/modules/DualListBoxTest_test.iml" group="DualListBoxTest" />
+    </modules>
+  </component>
+</project>
