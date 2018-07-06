@@ -34,7 +34,8 @@
                 moveAllBtn: true,               // Whether the append all button is available.
                 maxAllBtn:  500,                // Maximum size of list in which the all button works without warning. See below.
                 selectClass:'form-control',
-                warning:    'Are you sure you want to move this many items? Doing so can cause your browser to become unresponsive.'
+                warning:    'Are you sure you want to move this many items? Doing so can cause your browser to become unresponsive.',
+	          upDownSortBtn: false
             };
 
             var htmlOptions = {
@@ -49,7 +50,8 @@
                 textLength: $(this).data('textLength'),
                 moveAllBtn: $(this).data('moveAllBtn'),
                 maxAllBtn:  $(this).data('maxAllBtn'),
-                selectClass:$(this).data('selectClass')
+                selectClass:$(this).data('selectClass'),
+	          upDownSortBtn:$(this).data('uds')
             };
 
             var options = $.extend({}, defaults, htmlOptions, paramOptions);
@@ -115,7 +117,7 @@
                 case 'str': /* Selected to the right. */
                     unselected.find('option:selected').appendTo(selected);
                     $(this).prop('disabled', true);
-                    $('.custom-stl').prop('disabled', false);
+                    if (options.upDownSortBtn == true) $('.custom-stl').prop('disabled', false);
                     break;
                 case 'atr': /* All to the right. */
                     if (unselected.find('option').length >= options.maxAllBtn && confirm(options.warning) ||
@@ -156,21 +158,24 @@
                     break;
                 case 'sort': /* Selected to up and down. */
                     selected.filterByText($(options.parentElement + ' .filter-selected'), options.timeout, options.parentElement).scrollTop(0).sortOptions();
+                    $('.custom-stl').prop('disabled',true);
                     checkEnableDisableUpDown();
                     break;
                 default: break;
             }
 
             unselected.filterByText($(options.parentElement + ' .filter-unselected'), options.timeout, options.parentElement).scrollTop(0).sortOptions();
-            // selected.filterByText($(options.parentElement + ' .filter-selected'), options.timeout, options.parentElement).scrollTop(0).sortOptions();
-
-            if(operation == 'stuad'){
-                options['highlightSelected'] = 'true';
-            }else {
-                options['highlightSelected'] = 'false';
+            if (options.upDownSortBtn == false) {
+                selected.filterByText($(options.parentElement + ' .filter-selected'), options.timeout, options.parentElement).scrollTop(0).sortOptions();
+            } else {
+                if (operation == 'stuad') {
+                    options['highlightSelected'] = true;
+                } else {
+                    options['highlightSelected'] = false;
+                }
+                enableDisableUpDown();
             }
             handleMovement(options);
-            enableDisableUpDown();
         });
 
         $(options.parentElement).closest('form').submit(function() {
@@ -183,7 +188,7 @@
             }
         });
 
-        // selected.filterByText($(options.parentElement + ' .filter-selected'), options.timeout, options.parentElement).scrollTop(0).sortOptions();
+        if (options.upDownSortBtn == false) selected.filterByText($(options.parentElement + ' .filter-selected'), options.timeout, options.parentElement).scrollTop(0).sortOptions();
         unselected.filterByText($(options.parentElement + ' .filter-unselected'), options.timeout, options.parentElement).scrollTop(0).sortOptions();
     }
 
@@ -257,7 +262,7 @@
             (options.horizontal == false ? '' : createHorizontalButtons(2, options.moveAllBtn)) +
             '       <select class="selected ' + options.selectClass + '" style="height: 239px; width: 100%;" multiple></select>' +
             '   </div>' +
-            (createRightVerticalButtons(options.moveAllBtn)));
+            (options.upDownSortBtn == false ? '' : (createRightVerticalButtons(options.moveAllBtn))));
 
         $(options.parentElement + ' .selected').prop('name', $(options.element).prop('name'));
         $(options.parentElement + ' .unselected-title').text('Available ' + options.title);

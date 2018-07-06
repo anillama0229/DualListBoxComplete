@@ -28,10 +28,12 @@
 
 <div class="container">
     <div id="dual-list-box" class="form-group row">
-        <select id="mySelect" multiple="multiple" data-title="people" data-horizontal="false" data-source="/assets/sample-100.json"
+        <select id="mySelect" multiple="multiple" data-title="people" data-horizontal="false" data-uds="true" data-source="/assets/sample-100.json"
                 data-value="index" data-text="name">
         </select>
     </div>
+
+    <span>Added more features to Geodan DualListBox.</span>
 </div>
 
 </body>
