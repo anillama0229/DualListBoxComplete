@@ -117,7 +117,10 @@
                 case 'str': /* Selected to the right. */
                     unselected.find('option:selected').appendTo(selected);
                     $(this).prop('disabled', true);
-                    if (options.upDownSortBtn == true) $('.custom-stl').prop('disabled', true);
+                    if (options.upDownSortBtn == true){
+                        $('.custom-stl').prop('disabled', true);
+                        $('.sort').prop('disabled', false);
+                    }
                     break;
                 case 'atr': /* All to the right. */
                     if (unselected.find('option').length >= options.maxAllBtn && confirm(options.warning) ||
@@ -128,12 +131,18 @@
                             }
                         });
                     }
+                    if (options.upDownSortBtn == true){
+                        $('.sort').prop('disabled', false);
+                    }
                     break;
                 case 'stl': /* Selected to the left. */
                     selected.find('option:selected').remove().appendTo(unselected);
                     $(this).prop('disabled', true);
                     $('.str').prop('disabled', true);
                     $('.btn-up-down-sort').prop('disabled',true);
+                    if (options.upDownSortBtn == true){
+                        $('.sort').prop('disabled', false);
+                    }
                     break;
                 case 'atl': /* All to the left. */
                     if (selected.find('option').length >= options.maxAllBtn && confirm(options.warning) ||
@@ -143,6 +152,9 @@
                                 $(this).remove().appendTo(unselected);
                             }
                         });
+                    }
+                    if (options.upDownSortBtn == true){
+                        $('.sort').prop('disabled', false);
                     }
                     break;
                 case 'stuad': /* Selected to up and down. */
@@ -295,7 +307,7 @@
         return '   <div class="col-md-2 center-block" style="margin-top: ' + (copyAllBtn ? '80px' : '130px') +'">' +
             '<button type="button" class="btn btn-default col-md-8 col-md-offset-2 stl btn-up-down-sort up" data-type="stuad" style="margin-bottom: 10px;" value="Up"><span class="glyphicon glyphicon-chevron-up"></span></button>' +
             '<button type="button" class="btn btn-default col-md-8 col-md-offset-2 stl btn-up-down-sort down" data-type="stuad" style="margin-bottom: 10px;" value="Down"><span class="glyphicon glyphicon-chevron-down"></span></button>' +
-            '<button type="button" class="btn btn-default col-md-8 col-md-offset-2 stl btn-up-down-sort" data-type="sort" style="margin-bottom: 10px;" value="Down"><span class="glyphicon glyphicon-sort-by-alphabet"></span></button>' +
+            '<button type="button" class="btn btn-default col-md-8 col-md-offset-2 stl btn-up-down-sort sort" data-type="sort" style="margin-bottom: 10px;" value="Down"><span class="glyphicon glyphicon-sort-by-alphabet"></span></button>' +
             '   </div>';
     }
 
